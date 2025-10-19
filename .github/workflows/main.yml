@@ -34,6 +34,12 @@ on:
         required: true
         default: false
 
+      enable_ytab:
+        description: "Integrate YTABConfig"
+        type: boolean
+        required: true
+        default: false
+
       ipa_url:
         description: "URL to the decrypted IPA file"
         default: ""
@@ -233,7 +239,7 @@ jobs:
           git clone --quiet --depth=1 --recurse-submodules https://github.com/therealFoxster/DontEatMyContent.git
 
       - name: Clone YTABConfig
-        if: ${{ inputs.enable_demc }}
+        if: ${{ inputs.enable_ytab }}
         run: |
           cd ${{ github.workspace }}
           git clone --quiet --depth=1 https://github.com/PoomSmart/YTABConfig.git

@@ -232,6 +232,14 @@ jobs:
           cd ${{ github.workspace }}
           git clone --quiet --depth=1 --recurse-submodules https://github.com/therealFoxster/DontEatMyContent.git
 
+      - name: Clone YTABConfig
+        if: ${{ inputs.enable_demc }}
+        run: |
+          cd ${{ github.workspace }}
+          git clone --quiet --depth=1 https://github.com/PoomSmart/YTABConfig.git
+
+
+
       - name: Build YouPiP
         if: ${{ inputs.enable_youpip }}
         run: |
@@ -295,6 +303,15 @@ jobs:
         env:
           THEOS: ${{ github.workspace }}/theos
 
+      - name: Build YTABConfig
+        if: ${{ inputs.enable_demc }}
+        run: |
+          cd ${{ github.workspace }}/YTABConfig
+          make clean package DEBUG=0 FINALPACKAGE=1
+          mv packages/*.deb ${{ github.workspace }}/YTABConfig.deb
+        env:
+          THEOS: ${{ github.workspace }}/theos
+          
       - name: Inject tweaks into IPA
         run: |
           tweaks="ytplus.deb OpenYoutubeSafariExtension.appex"

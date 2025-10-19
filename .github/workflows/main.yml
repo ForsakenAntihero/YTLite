@@ -34,12 +34,6 @@ on:
         required: true
         default: false
 
-      enable_ytab:
-        description: "Integrate YTABConfig"
-        type: boolean
-        required: true
-        default: false
-
       ipa_url:
         description: "URL to the decrypted IPA file"
         default: ""

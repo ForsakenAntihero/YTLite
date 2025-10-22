@@ -238,12 +238,6 @@ jobs:
           cd ${{ github.workspace }}
           git clone --quiet --depth=1 https://github.com/PoomSmart/YTABConfig.git
 
-      - name: Clone BigYTMiniPlayer
-        if: ${{ inputs.enable_demc }}
-        run: |
-          cd ${{ github.workspace }}
-          git clone --quiet --depth=1 https://github.com/Galactic-Dev/BigYTMiniPlayer.git
-
       - name: Build YouPiP
         if: ${{ inputs.enable_youpip }}
         run: |
@@ -308,7 +302,7 @@ jobs:
           THEOS: ${{ github.workspace }}/theos
 
       - name: Build YTABConfig
-        if: ${{ inputs.enable_demc }}
+        if: ${{ inputs.enable_XXXX }}
         run: |
           cd ${{ github.workspace }}/YTABConfig
           make clean package DEBUG=0 FINALPACKAGE=1
@@ -316,15 +310,6 @@ jobs:
         env:
           THEOS: ${{ github.workspace }}/theos
 
-      - name: Build BigYTMiniPlayer
-        if: ${{ inputs.enable_demc }}
-        run: |
-          cd ${{ github.workspace }}/BigYTMiniPlayer
-          make clean package DEBUG=0 FINALPACKAGE=1
-          mv packages/*.deb ${{ github.workspace }}/BigYTMiniPlayer.deb
-        env:
-          THEOS: ${{ github.workspace }}/theos
-          
       - name: Inject tweaks into IPA
         run: |
           tweaks="ytplus.deb OpenYoutubeSafariExtension.appex"

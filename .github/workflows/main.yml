@@ -152,6 +152,13 @@ jobs:
           git checkout
           mv *.appex ${{ github.workspace }}
 
+      - name: Clone Share ServiceExtension
+        run: |
+          cd YoutubeExtensions
+          git sparse-checkout set --no-cone ShareServiceExtension.appex
+          git checkout
+          mv *.appex ${{ github.workspace }}
+
       - name: Clone YouTubeHeader
         if: ${{ inputs.enable_youpip || inputs.enable_ytuhd || inputs.enable_yq || inputs.enable_ryd || inputs.enable_demc }}
         run: |
@@ -297,7 +304,7 @@ jobs:
 
       - name: Inject tweaks into IPA
         run: |
-          tweaks="ytplus.deb OpenYoutubeSafariExtension.appex"
+          tweaks="ytplus.deb OpenYoutubeSafariExtension.appex ShareServiceExtension.appex"
 
           for f in *.deb; do
             if [ -f "$f" ]; then
